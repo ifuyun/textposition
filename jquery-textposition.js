@@ -1,8 +1,8 @@
-/*global jQuery*/
+/*global jQuery,document,window*/
 /**
  * 获取text或textarea选择范围；替换选中文本为指定参数内容（兼容IE8、9、10、FF、Chrome）
  * @author ifuyun
- * @version 1.0
+ * @version 1.0.1(2014-02-24)
  */
 (function ($) {
     $.fn.extend({
@@ -53,7 +53,6 @@
                 //解决FF未选中问题
                 $(this).focus();
                 $(this).val(curVal.substring(0, start) + text + curVal.substring(end, curVal.length));
-                //substring改substr
                 if (tng) {//文本域
                     tng.moveStart('character', start);
                     //负数（表示从末尾往前计算）
@@ -79,7 +78,7 @@
         moveposition: function (start, offset, shouldSelected) {
             var inputEle = $(this)[0], rng;
             start = start || 0;
-            offset = offset || -1;
+            offset = offset === undefined ? -1 : offset;
 
             if (!$.support.leadingWhitespace) {//IE6,7,8
                 //必须
@@ -97,8 +96,14 @@
             if (!$.support.leadingWhitespace) {
                 if (shouldSelected) {
                     rng.moveStart('character', start);
+                } else {
+                    rng.moveStart('character', start + offset);
                 }
-                rng.moveEnd('character', offset);
+                if(offset < 0){
+                    rng.moveEnd('character', start + offset - $(this).val().length);
+                } else {
+                    rng.moveEnd('character', offset);
+                }
                 rng.select();
             } else {
                 if (shouldSelected) {
@@ -110,4 +115,4 @@
             }
         }
     });
-})(jQuery);
+}(jQuery));
