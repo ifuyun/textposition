@@ -1,0 +1,20 @@
+{
+  "name": "textposition",
+  "version": "1.0.0",
+  "description": "Text range tools for jQuery",
+  "main": "jquery-textposition.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {},
+  "keywords": [
+    "TextRange",
+    "Tool",
+    "jQuery"
+  ],
+  "author": {
+    "name": "Fuyun",
+    "email": "ifuyun@outlook.com",
+    "url": "http://www.ifuyun.com/"
+  },
+  "license": "MIT"
+}
